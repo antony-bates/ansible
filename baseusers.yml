@@ -1,0 +1,21 @@
+- name: Batch Create System Users
+  hosts: all
+  become: true
+
+  vars:
+    users_to_create:
+      - username: antony-local
+        name: "Antony Local"
+        shell: /bin/bash
+        groups: "sudo"
+
+  tasks:
+    - name: Ensure users exist on the system
+      ansible.builtin.user:
+        name: "{{ item.username }}"
+        comment: "{{ item.name }}"
+        shell: "{{ item.shell }}"
+        groups: "{{ item.groups }}"
+        append: true
+        state: present
+      loop: "{{ users_to_create }}"
