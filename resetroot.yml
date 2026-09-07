@@ -1,0 +1,15 @@
+---
+- name: Reset Root Password
+  hosts: all
+  become: true  # Required to modify the root account
+
+  vars:
+    # Replace this with your desired cleartext password
+    new_root_password: "MyNewSecureRootPassword2026!"
+
+  tasks:
+    - name: Update root user password
+      ansible.builtin.user:
+        name: root
+        password: "{{ new_root_password | string | password_hash('sha512') }}"
+        update_password: always   # Ensures the password changes if it differs from current state
