@@ -14,7 +14,7 @@
           - nfs-common
           - curl
           - autofs
-          - ipa-client
+          - freeipa-client
           - oddjob-mkhomedir
         state: present
         update_cache: yes
@@ -29,7 +29,7 @@
           - nfs-common
           - curl
           - autofs
-          - ipa-client
+          - freeipa-client
           - oddjob-mkhomedir
         state: present
       when: ansible_os_family == "RedHat"
